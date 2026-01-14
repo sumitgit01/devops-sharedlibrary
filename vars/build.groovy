@@ -1,6 +1,6 @@
 def call(){
     pipeline {
-        agent any
+        agent go4gst-sit
         stages {
             stage('build'){
                 steps{
