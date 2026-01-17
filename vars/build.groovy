@@ -7,6 +7,7 @@ def call(){
                     script{
                         sh """
                             echo "building the code"
+                            mvn clean install
                         """
                     }
                 }
@@ -22,6 +23,9 @@ def call(){
                 steps{
                     script{
                         println "build docker image and push"
+                        docker build -t seh-students:0.0.1-RELEASE
+                        docker tag seh-students:0.0.1-RELEASE summitjoshi/seh-students:0.0.1
+                        docker push summitjoshi/seh-students:0.0.1
                     }
                 }
             }
@@ -29,7 +33,7 @@ def call(){
                 steps{
                     script{
                         println "push Helm packages to artifactory"
-                    }
+                     }
                 }
             }
             
