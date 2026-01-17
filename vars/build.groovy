@@ -23,9 +23,11 @@ def call(){
                 steps{
                     script{
                         println "build docker image and push"
-                        docker build -t seh-students:0.0.1-RELEASE
-                        docker tag seh-students:0.0.1-RELEASE summitjoshi/seh-students:0.0.1
-                        docker push summitjoshi/seh-students:0.0.1
+                        sh """
+                            docker build -t seh-students:0.0.1-RELEASE
+                            docker tag seh-students:0.0.1-RELEASE summitjoshi/seh-students:0.0.1
+                            docker push summitjoshi/seh-students:0.0.1
+                        """
                     }
                 }
             }
