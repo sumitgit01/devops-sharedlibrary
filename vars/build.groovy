@@ -44,10 +44,10 @@ def call(){
                             -T seh-students-0.0.1.tgz \
                             "https://trialp04su6.jfrog.io/artifactory/seh-helm/seh-students/release/0.0.1/seh-students-0.0.1.tgz"
                         """
-                     }
+                        }
+                    }
                 }
-            }
-            
+            }  
         }
     }
 }
