@@ -33,6 +33,15 @@ def call(){
                 steps{
                     script{
                         println "push Helm packages to artifactory"
+                        withCredentials([usernamePassword(credentialsId: 'artifactory-creds', usernameVariable: 'ART_USER', passwordVariable: 'ART_PASS')]) {
+                        sh """
+                            # login to Artifactory Helm registry
+                            helm registry login -u $ART_USER -p $ART_PASS trialp04su6.jfrog.io
+                            tar -czvf seh-students-0.0.1.tgz manifestbuild
+                            curl -u $ART_USER:$ART_PASS \
+                            -T seh-students-0.0.1.tgz \
+                            "https://trialp04su6.jfrog.io/artifactory/seh-helm/seh-students/release/0.0.1/seh-students-0.0.1.tgz"
+                        """
                      }
                 }
             }
