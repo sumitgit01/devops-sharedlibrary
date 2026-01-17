@@ -9,8 +9,6 @@ def call(){
                             echo "building the code"
                             java -version
                             mvn -version
-                            #export JAVA_HOME="/datadisk/soft/jdk-21.0.9/bin/"
-                            #echo "${JAVA_HOME}"
                             mvn clean install
                         """
                     }
