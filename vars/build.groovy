@@ -23,13 +23,18 @@ def call(){
                 steps{
                     script{
                         println "build docker image and push"
-                        sh """
-                            docker build -t seh-students:0.0.1-RELEASE .
-                            docker tag seh-students:0.0.1-RELEASE summitjoshi/seh-students:0.0.1
-                            docker push summitjoshi/seh-students:0.0.1
-                        """
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds-go4gst', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            
+                            sh """
+                                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                                docker build -t seh-students:0.0.1-RELEASE .
+                                docker tag seh-students:0.0.1-RELEASE summitjoshi/seh-students:0.0.1
+                                docker push summitjoshi/seh-students:0.0.1
+                            """
+                        }
                     }
                 }
+
             }
             stage('push helm packages to artifactory'){
                 steps{
