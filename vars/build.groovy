@@ -7,6 +7,9 @@ def call(){
                     script{
                         sh """
                             echo "building the code"
+                            java -version
+                            mvn -version
+                            echo "${JAVA_HOME}"
                             mvn clean install
                         """
                     }
